@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> The Renaissance </title>
+
+    <style>
+
+        /* Style code - DONT TOUCH THIS! */
+
+        * { margin: 0px;
+            padding: 0px;}
+
+        body {background: url("pic.jpeg")}
+
+        #title {padding: 5px; border-bottom: solid 1px black;  color: white;  font-family: "Kunstler Script";
+            font-size: 4em; margin-bottom: 20px;
+            text-shadow: 2px 2px 4px #000000;}
+        #title:hover  {text-shadow: 2px 2px 20px #000000;}
+
+        #leftmeny {
+            color: white;
+            text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 10px black;
+            width: 20%; height: 444px;
+            border: solid 1px black; float: left; background-color: grey;
+            margin: -1px -1px 0px 0px;  box-shadow: 10px 10px 9px black;
+            margin-right: 30px; margin-bottom: 100vh;
+        }
+
+        #leftmeny h2 {padding: 5px 0px 5px 0px;}
+        #leftmeny h2:hover {background-color: #444444;}
+        a {color: white;}
+        #bigbox {float: left; width: 100%;}
+
+   /* TEXT CODE */
+	#text {color: white;
+	font-size: 20px;
+	    text-shadow: 1px 1px 1px black, 0 0 100px black, 0 0 5px black;
+	margin: 50px; margin-top: 20px;
+	opacity: 1}
+				#qui {background-color: black;}
+    </style>
+    <style>
+        div#test{ border:Black 3px solid; padding:10px; background-color: grey; width:80%; text-align: center;}
+    </style>
+    <script type="text/javascript">
+        // pos is position of where the user in the test or which question they're up to
+        var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0;
+        // this is a multidimensional array with 4 inner array elements with 5 elements inside them
+        var questions = [
+            ["When did the renaissance start", "1400", "1500", "1600", "B"],
+            ["Who started the renaissance in England?", "Queen Elizabeth", "Henry the 10th", "Henry the 8th", "C"],
+            ["Why did William Shakespere become famous?", "Author", "Government", "Military", "A"],
+            ["Who had to do all the breastfeeding of infants?", "Rich women", "The cows", "Poor people", "C"]
+        ];
+        // this get function is short for the getElementById function
+        function get(x){
+            return document.getElementById(x);
+        }
+        function renderQuestion(){
+            test = get("test");
+            if(pos >= questions.length){
+                test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+                get("test_status").innerHTML = "Test completed";
+                // resets the variable to allow users to restart the test
+                pos = 0;
+                correct = 0;
+                // stops rest of renderQuestion function running when test is completed
+                return false;
+            }
+            get("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+            question = questions[pos][0];
+            chA = questions[pos][1];
+            chB = questions[pos][2];
+            chC = questions[pos][3];
+            test.innerHTML = "<h3>"+question+"</h3>";
+            // the += appends to the data we started on the line above
+            test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+            test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+            test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br><br>";
+            test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+        }
+        function checkAnswer(){
+            // use getElementsByName because we have an array which it will loop through
+            choices = document.getElementsByName("choices");
+            for(var i=0; i<choices.length; i++){
+                if(choices[i].checked){
+                    choice = choices[i].value;
+                }
+            }
+            // checks if answer matches the correct choice
+            if(choice == questions[pos][4]){
+                //each time there is a correct answer this value increases
+                correct++;
+            }
+            // changes position of which character user is on
+            pos++;
+            // then the renderQuestion function runs again to go to next question
+            renderQuestion();
+        }
+        window.addEventListener("load", renderQuestion, false);
+    </script>
+</head>
+<body>
+<center>
+
+    <div id = "topbar">
+        <a href = "index.html"><h1 id = "title"> The Renaissance </h1></a>
+    </div>
+
+ <div id = "leftmeny"> 
+	<br>	
+	<br>
+		<a href = "culture.html"><h2 id = "cul"> Culture & Social life </h2>
+	<br>
+		<a href = "religion.html"><h2 id = "rel"> Religion </h2></a>
+	<br>
+		<a href = "history.html"><h2 id = "his"> History </h2></a>
+	<br>
+		<a href = "government.html"><h2 id = "gov"> Government </h2></a>
+	<br>
+		<a href = "women.html"><h2 id = "wom"> Role of Women </h2></a>
+	<br>
+		<a href = "quiz.html"><h2 id = "qui"> Quiz </h2></a>
+	<br>
+		<a href = "shakespeare.html"><h2 id = "sha"> Shakespeare </h2></a>
+	</div>
+
+
+
+    <div id = "bigbox">
+</center>
+<div id = "text">
+    <!-- CODE HERE -->
+
+    <h2 id="test_status"></h2>
+    <div id="test"></div>
+    <!-- CODE HERE -->
+</div>
+</div>
+</center>
+</body>
+</html>
